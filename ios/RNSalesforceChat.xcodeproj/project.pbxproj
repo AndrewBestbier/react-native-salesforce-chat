@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		794505AD207DFAB700466B4E /* SalesforceAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794505A7207DFAB600466B4E /* SalesforceAnalytics.framework */; };
+		794505AE207DFAB700466B4E /* SmartStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794505A8207DFAB600466B4E /* SmartStore.framework */; };
+		794505AF207DFAB700466B4E /* ServiceChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794505A9207DFAB600466B4E /* ServiceChat.framework */; };
+		794505B0207DFAB700466B4E /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794505AA207DFAB600466B4E /* CocoaLumberjack.framework */; };
+		794505B1207DFAB700466B4E /* ServiceCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794505AB207DFAB600466B4E /* ServiceCore.framework */; };
+		794505B2207DFAB700466B4E /* SalesforceSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794505AC207DFAB700466B4E /* SalesforceSDKCore.framework */; };
 		B3E7B58A1CC2AC0600A0062D /* RNSalesforceChat.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNSalesforceChat.m */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +30,12 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNSalesforceChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSalesforceChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		794505A7207DFAB600466B4E /* SalesforceAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SalesforceAnalytics.framework; sourceTree = "<group>"; };
+		794505A8207DFAB600466B4E /* SmartStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SmartStore.framework; sourceTree = "<group>"; };
+		794505A9207DFAB600466B4E /* ServiceChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ServiceChat.framework; sourceTree = "<group>"; };
+		794505AA207DFAB600466B4E /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
+		794505AB207DFAB600466B4E /* ServiceCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ServiceCore.framework; sourceTree = "<group>"; };
+		794505AC207DFAB700466B4E /* SalesforceSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SalesforceSDKCore.framework; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNSalesforceChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSalesforceChat.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNSalesforceChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSalesforceChat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -33,6 +45,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				794505B1207DFAB700466B4E /* ServiceCore.framework in Frameworks */,
+				794505AF207DFAB700466B4E /* ServiceChat.framework in Frameworks */,
+				794505AE207DFAB700466B4E /* SmartStore.framework in Frameworks */,
+				794505B2207DFAB700466B4E /* SalesforceSDKCore.framework in Frameworks */,
+				794505B0207DFAB700466B4E /* CocoaLumberjack.framework in Frameworks */,
+				794505AD207DFAB700466B4E /* SalesforceAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +70,12 @@
 			children = (
 				B3E7B5881CC2AC0600A0062D /* RNSalesforceChat.h */,
 				B3E7B5891CC2AC0600A0062D /* RNSalesforceChat.m */,
+				794505AA207DFAB600466B4E /* CocoaLumberjack.framework */,
+				794505A7207DFAB600466B4E /* SalesforceAnalytics.framework */,
+				794505AC207DFAB700466B4E /* SalesforceSDKCore.framework */,
+				794505A9207DFAB600466B4E /* ServiceChat.framework */,
+				794505AB207DFAB600466B4E /* ServiceCore.framework */,
+				794505A8207DFAB600466B4E /* SmartStore.framework */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -203,8 +227,12 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
@@ -219,6 +247,10 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
