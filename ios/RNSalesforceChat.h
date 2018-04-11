@@ -8,4 +8,4 @@
 @interface RNSalesforceChat : NSObject <RCTBridgeModule>
 
 @end
-  
+
