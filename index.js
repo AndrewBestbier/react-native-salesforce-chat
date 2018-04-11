@@ -1,6 +1,5 @@
-
 import { NativeModules } from 'react-native';
 
-const { RNSalesforceChat } = NativeModules;
+const { SalesforceChat } = NativeModules;
 
-export default RNSalesforceChat;
+export default SalesforceChat;
