@@ -53,10 +53,10 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
 
         preChatFields.clear();
         preChatEntities.clear();
-        PreChatField subject = new PreChatField.Builder().required(false)
-                .build("Subject", "Subject", PreChatField.STRING);
 
         // Some required fields (Hidden)
+        PreChatField subject = new PreChatField.Builder().hidden(true)
+                .value(SUBJECT).build("Subject", "Subject", PreChatField.STRING);
         PreChatField origin = new PreChatField.Builder().hidden(true)
                 .value(ORIGIN).build("Origin", "Origin", PreChatField.STRING);
         PreChatField currency = new PreChatField.Builder().hidden(true)
@@ -96,7 +96,6 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
 
         // Create the case entity
         PreChatEntity caseEntity = new PreChatEntity.Builder()
-                .showOnCreate(true)
                 .saveToTranscript("Case")
                 .addPreChatEntityField(caseEntityBuilder.build("Subject", "Subject"))
                 .addPreChatEntityField(caseEntityBuilder.build("Origin", "Origin"))
@@ -149,8 +148,14 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
     };
 
 
+
     private void startChat() {
-        ChatUI.configure(ChatUIConfiguration.create(chatConfiguration))
+      ChatUIConfiguration chatUiConfiguration =
+        new ChatUIConfiguration.Builder()
+          .chatConfiguration(chatConfiguration)
+          .disablePreChatView(true)
+          .build();
+        ChatUI.configure(chatUiConfiguration)
                 .createClient(reactContext)
                 .onResult(new Async.ResultHandler<ChatUIClient>() {
 
