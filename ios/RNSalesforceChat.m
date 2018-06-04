@@ -17,10 +17,8 @@ RCT_EXPORT_METHOD(configLaunch:(NSString *)subject origin:(NSString *)origin cur
     prechatEntities = [NSMutableArray array];
 
     // Prechat fields
-    SCSPrechatTextInputObject* subjectField = [[SCSPrechatTextInputObject alloc]
-                                               initWithLabel:NSLocalizedString(@"Subject", nil)];
-    subjectField.required = YES;
-    subjectField.keyboardType = UIKeyboardTypeDefault;
+    SCSPrechatObject* subjectField = [[SCSPrechatObject alloc]
+                                     initWithLabel:@"Subject" value: subject];
     [prechatFields addObject:subjectField];
     SCSPrechatObject* originField = [[SCSPrechatObject alloc]
                                      initWithLabel:@"Origin" value: origin];
