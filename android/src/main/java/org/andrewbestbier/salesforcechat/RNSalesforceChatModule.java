@@ -49,8 +49,8 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public void configLaunch(String SUBJECT, String ORIGIN, String CURRENCY_ISO_CODE, String STATUS, String CONTACT_TYPE, String LOCALE_C, String PARTNER_ENGINEER_EMAIL_C, String PARTNER_ENGINEER, String USER_COMPLETE_NAME) {
-        
+    public void configLaunch(String SUBJECT, String ORIGIN, String CURRENCY_ISO_CODE, String STATUS, String CONTACT_TYPE, String LOCALE_C, String SUPPLIED_EMAIL, String EMAIL, String USER_COMPLETE_NAME) {
+
         preChatFields.clear();
         preChatEntities.clear();
         PreChatField subject = new PreChatField.Builder().required(false)
@@ -67,15 +67,15 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
                 .value(CONTACT_TYPE).build("ContactType__c", "ContactType__c", PreChatField.STRING); //Hardcoded
         PreChatField locale = new PreChatField.Builder().hidden(true)
                 .value(LOCALE_C).build("Locale__c", "Locale__c", PreChatField.STRING);
-        PreChatField engineerEmail = new PreChatField.Builder().hidden(true)
-                .value(PARTNER_ENGINEER_EMAIL_C).build("PartnerEngineerEmail__c", "PartnerEngineerEmail__c", PreChatField.EMAIL);
+        PreChatField suppliedEmail = new PreChatField.Builder().hidden(true)
+                .value(SUPPLIED_EMAIL).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
         PreChatField suppliedName = new PreChatField.Builder().hidden(true)
                 .value(USER_COMPLETE_NAME).build("SuppliedName", "SuppliedName", PreChatField.STRING);
         //An unique identification of an engineer
 
         // Some optional fields (Hidden)
-        PreChatField engineerRef = new PreChatField.Builder().hidden(true)
-                .value(PARTNER_ENGINEER).build("PartnerEngineerRef__c", "PartnerEngineerRef__c", PreChatField.STRING);
+        PreChatField email = new PreChatField.Builder().hidden(true)
+                .value(EMAIL).build("Email", "Email", PreChatField.EMAIL);
         //An unique identification of an engineer
 
         // Add the fields to the list
@@ -85,9 +85,9 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
         preChatFields.add(status);
         preChatFields.add(contactType);
         preChatFields.add(locale);
-        preChatFields.add(engineerEmail);
+        preChatFields.add(suppliedEmail);
         preChatFields.add(suppliedName);
-        preChatFields.add(engineerRef);
+        preChatFields.add(email);
 
 
         // Create an entity field builder for Case fields
@@ -104,7 +104,7 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
                 .addPreChatEntityField(caseEntityBuilder.build("Status", "Status"))
                 .addPreChatEntityField(caseEntityBuilder.build("ContactType__c", "ContactType__c"))
                 .addPreChatEntityField(caseEntityBuilder.build("Locale__c", "Locale__c"))
-                .addPreChatEntityField(caseEntityBuilder.build("PartnerEngineerEmail__c", "PartnerEngineerEmail__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("SuppliedEmail", "SuppliedEmail"))
                 .addPreChatEntityField(caseEntityBuilder.build("SuppliedName", "SuppliedName"))
                 .build("Case");
         // Add the entities to the list
