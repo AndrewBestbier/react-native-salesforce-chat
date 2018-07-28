@@ -111,7 +111,7 @@ RCT_EXPORT_METHOD(configLaunch:(NSString *)subject origin:(NSString *)origin cur
     [prechatEntities addObject: emailEntity];
 }
 
-RCT_EXPORT_METHOD(configChat:(NSString *)orgId deploymentId:(NSString *)deploymentId buttonId: (NSString *) buttonId: (NSString *) liveAgentPod)
+RCT_EXPORT_METHOD(configChat:(NSString *)orgId deploymentId:(NSString *)deploymentId buttonId:(NSString *)buttonId liveAgentPod:(NSString *)liveAgentPod suppliedName:(NSString *)suppliedName)
 {
     chatConfiguration =
     [[SCSChatConfiguration alloc] initWithLiveAgentPod: liveAgentPod
@@ -119,6 +119,7 @@ RCT_EXPORT_METHOD(configChat:(NSString *)orgId deploymentId:(NSString *)deployme
                                           deploymentId: deploymentId
                                               buttonId: buttonId];
 
+    chatConfiguration.visitorName = suppliedName;
     chatConfiguration.allowBackgroundExecution = false;
     chatConfiguration.allowBackgroundNotifications = false;
     [chatConfiguration.prechatFields addObjectsFromArray:prechatFields];
