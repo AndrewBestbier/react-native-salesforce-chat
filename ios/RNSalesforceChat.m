@@ -119,6 +119,8 @@ RCT_EXPORT_METHOD(configChat:(NSString *)orgId deploymentId:(NSString *)deployme
                                           deploymentId: deploymentId
                                               buttonId: buttonId];
 
+    chatConfiguration.allowBackgroundExecution = false;
+    chatConfiguration.allowBackgroundNotifications = false;
     [chatConfiguration.prechatFields addObjectsFromArray:prechatFields];
     [chatConfiguration.prechatEntities addObjectsFromArray: prechatEntities];
 

@@ -23,6 +23,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "SCSPrechatObject.h"
 
 @class SCSPrechatPickerOption;
 
