@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param animated Indicates whether or not the minimization should occur with an animation.
  @param completion Optional completion block to be called when the operation has completed.
  */
-- (void)setMinimized:(BOOL)minimized animated:(BOOL)animated completion:(nullable void(^)())completion;
+- (void)setMinimized:(BOOL)minimized animated:(BOOL)animated completion:(nullable void(^)(void))completion;
 
 @end
 

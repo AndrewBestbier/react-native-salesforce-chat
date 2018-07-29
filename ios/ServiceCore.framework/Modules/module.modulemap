@@ -18,7 +18,4 @@ framework module ServiceCore {
     link "System"
     link "sqlite3"
     link "z"
-
-    use SalesforceSDKCore
-    use SalesforceAnalytics
 }

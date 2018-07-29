@@ -32,9 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class SCAppearanceConfiguration;
 
 /* SCFontWeight */
-SC_EXTERN NSInteger const SCFontWeightLight;
-SC_EXTERN NSInteger const SCFontWeightRegular;
-SC_EXTERN NSInteger const SCFontWeightBold;
+SCS_EXTERN NSInteger const SCFontWeightLight;
+SCS_EXTERN NSInteger const SCFontWeightRegular;
+SCS_EXTERN NSInteger const SCFontWeightBold;
+
+SCS_EXTERN CGFloat const SCNavigationBarButtonWidth;
 
 /**
  Delegate protocol for responding to style and branding customization requests at runtime.

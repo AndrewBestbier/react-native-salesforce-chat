@@ -157,6 +157,22 @@ __deprecated_enum_msg("Use allowMinimization, defaultToMinimized, and fullscreen
  */
 @property (nonatomic) BOOL remoteLoggingEnabled;
 
+/**
+ Determines whether the session will use UIApplication's beginBackgroundTask API
+ to allow for extended background execution to allow for reduced session timeouts.
+
+ Default to `YES`.
+ */
+@property (nonatomic, assign) BOOL allowBackgroundExecution;
+
+/**
+ Determines whether the session will use UserNotifications to post local notifications
+ on selected chat events. Requires allowBackgroundExecution to be set to YES.
+
+ Default to `YES`.
+ */
+@property (nonatomic, assign) BOOL allowBackgroundNotifications;
+
 ///---------------------------------
 /// @name User Interface Behavior
 ///---------------------------------

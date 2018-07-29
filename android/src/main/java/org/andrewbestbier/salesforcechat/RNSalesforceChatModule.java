@@ -111,10 +111,11 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void configChat(String ORG_ID, String DEPLOYMENT_ID, String BUTTON_ID, String LIVE_AGENT_POD) {
+    public void configChat(String ORG_ID, String DEPLOYMENT_ID, String BUTTON_ID, String LIVE_AGENT_POD, String VISITOR_NAME) {
         chatConfiguration = new ChatConfiguration.Builder(ORG_ID, BUTTON_ID, DEPLOYMENT_ID, LIVE_AGENT_POD)
                 .preChatFields(preChatFields)
                 .preChatEntities(preChatEntities)
+                .visitorName(VISITOR_NAME)
                 .build();
     }
 

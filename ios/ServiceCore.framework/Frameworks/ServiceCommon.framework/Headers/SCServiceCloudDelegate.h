@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class SCServiceCloud;
 @class SFUserAccount;
+@class SCSAuthenticationSettings;
 
 @protocol SCSActionItemContainer, SCSActionItem;
 
@@ -104,29 +105,48 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)serviceCloud:(SCServiceCloud *)serviceCloud shouldShowActionWithName:(NSString*)name __deprecated_msg("Please use the -[SCSActionManagerDelegate actionManager:shouldShowActionWithName:] method instead");
 
 /**
+ Deprecated. See `-serviceCloud:shouldAuthenticateServiceType:completion:`.
+ */
+- (BOOL)serviceCloud:(SCServiceCloud*)serviceCloud shouldAuthenticateService:(SCServiceType)service completion:(void(^)(SFUserAccount * _Nullable account))completion SCS_API_DEPRECATED_WITH_REPLACEMENT("setAuthenticationSettings:forServiceType:");
+
+/**
+ Deprecated. See `-serviceCloud:authenticationFailed:forServiceType:`.
+ */
+- (void)serviceCloud:(SCServiceCloud*)serviceCloud serviceAuthenticationFailedWithError:(NSError*)error SCS_API_DEPRECATED_WITH_REPLACEMENT("serviceCloud:authenticationFailed:forServiceType:");
+
+/**
  Asks the delegate whether authentication should be performed for the specified service.
-
- The value of the service name can be one of these constants (defined in Service SDK):
-
+ 
+ The service can be one of the `SCServiceType` enum values:
+ 
  - `SCServiceTypeCases`: for the Case Management service
  - `SCServiceTypeKnowledge`: for the Knowledge service
  
- If the delegate returns `YES` to this method, it is the responsibility of the receiver to supply the new user account object to the supplied completion block.  The value supplied to the completion block will replace the `SCServiceCloud.account` property.
-
+ If the delegate returns `YES` to this method, the receiver must pass along the
+ new authentication settings to the supplied completion block. These authentication
+ settings are subsequently passed along to the
+ `-[SCServiceCloud setAuthenticationSettings:forServiceType:completion:]` method.
+ 
  @param serviceCloud  `SCServiceCloud` interface instance.
  @param service The associated service.
- @param completion The completion block you should call when you've retrieved the user account.
+ @param completion The completion block you should call when you've retrieved authentication credentials. If `nil` is assigned to the completion block, it is assumed that guest access is desired.
  @return `YES` if the receiver plans to supply authentication information for this service, otherwise `NO` if the current account credentials are sufficient.
+ 
+ @see `SCSAuthenticationSettings`
  */
-- (BOOL)serviceCloud:(SCServiceCloud*)serviceCloud shouldAuthenticateService:(SCServiceType)service completion:(void(^)(SFUserAccount * _Nullable account))completion;
+- (BOOL)serviceCloud:(SCServiceCloud*)serviceCloud shouldAuthenticateServiceType:(SCServiceType)service completion:(void(^)(SCSAuthenticationSettings * _Nullable settings))completion;
 
 /**
  Tells the delegate when there is an error in authenticating Case Management or Knowledge.
  
  @param serviceCloud  `SCServiceCloud` interface instance.
  @param error The error message associated with the failure.
+ @param service Service being authenticated.
+ 
+ @return Whether the receiver wants to attempt to re-authenticate. If you specify `YES`, the SDK subsequently
+ calls `-serviceCloud:shouldAuthenticateServiceType:completion:`. If you specify `NO`, the SDK reverts to guest user status.
  */
-- (void)serviceCloud:(SCServiceCloud*)serviceCloud serviceAuthenticationFailedWithError:(NSError*)error;
+- (BOOL)serviceCloud:(SCServiceCloud*)serviceCloud authenticationFailed:(NSError*)error forServiceType:(SCServiceType)service;
 
 /**
  Tells the delegate when there is a log message that has been sent to the logging server.

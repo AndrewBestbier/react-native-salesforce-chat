@@ -22,6 +22,8 @@
  * DAMAGES.
  */
 
+#import <Foundation/Foundation.h>
+
 /**
  *  Reasons why a Live Agent Session may have ended.
  *
