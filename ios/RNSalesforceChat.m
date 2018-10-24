@@ -120,8 +120,6 @@ RCT_EXPORT_METHOD(configChat:(NSString *)orgId deploymentId:(NSString *)deployme
                                               buttonId: buttonId];
 
     chatConfiguration.visitorName = suppliedName;
-    chatConfiguration.allowBackgroundExecution = false;
-    chatConfiguration.allowBackgroundNotifications = false;
     [chatConfiguration.prechatFields addObjectsFromArray:prechatFields];
     [chatConfiguration.prechatEntities addObjectsFromArray: prechatEntities];
 

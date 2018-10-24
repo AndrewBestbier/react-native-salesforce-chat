@@ -26,6 +26,8 @@
 #import <Foundation/Foundation.h>
 #endif
 
+static NSString * const kLiveAgentAPIVersion = @"36";
+
 #ifdef __APPLE__
 #import "TargetConditionals.h"
 #endif
@@ -51,7 +53,6 @@
 #endif
 
 #define safeReference(value) value ?: [NSNull null]
-#define safeReferenceWithString(value) value ?: @""
 
 #pragma GCC diagnostic ignored "-Wvariadic-macros"
 #define safeBlock(block, args...) if (block) { \

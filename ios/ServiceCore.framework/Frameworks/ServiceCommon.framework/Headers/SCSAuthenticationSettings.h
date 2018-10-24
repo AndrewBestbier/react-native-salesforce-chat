@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  */
 typedef NSString * SCSOAuth2JSONKey SCS_STRING_ENUM;
-
 SCS_EXTERN SCSOAuth2JSONKey const SCSOAuth2JSONKeyAccessToken; // Required
 SCS_EXTERN SCSOAuth2JSONKey const SCSOAuth2JSONKeyRefreshToken;
 SCS_EXTERN SCSOAuth2JSONKey const SCSOAuth2JSONKeyInstanceUrl; // Required
@@ -37,15 +36,14 @@ SCS_EXTERN SCSOAuth2JSONKey const SCSOAuth2JSONKeyCommunityId;
  Authentication settings for the Snap-ins SDK. This class is necessary if you
  want to use any of the SDK features in authenticated mode. You'll need to
  authenticate, for instance, if you want to access a knowledge base only
- accessible to logged in users, or if you want a user to view and manage their
- cases. Create an instance of this class using one of the provided initialization methods.
+ accessible to logged in users or if you want a user to view and manage their
+ cases.
  
- You can either authenticate explicitly using
- `-[SCServiceCloud setAuthenticationSettings:forServiceType:completion:]`
+ You can either authenticate explicitly using `-[SCServiceCloud setAuthenticationSettings:forServiceType:completion:]`
  or you can authenticate on-demand by implementing
- `-[SCServiceCloudDelegate serviceCloud:shouldAuthenticateServiceType:completion:]`.
+ `-[SCServiceCloudDelegate serviceCloud:shouldAuthenticateServiceType:completion:]`
  
- To learn more about authentication, see [Authentication](../authentication.html).
+ Create an instance of this class using one of the provided initialization methods.
  */
 @interface SCSAuthenticationSettings : NSObject
 

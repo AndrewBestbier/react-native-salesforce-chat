@@ -33,54 +33,17 @@ NS_ASSUME_NONNULL_BEGIN
 @class SCSAuthenticationSettings;
 
 /**
- Shared singleton class used as the primary access point for the Snap-ins SDK.
+ Shared singleton class used as the primary access point for the Service SDK.
  
- ### Overview
- 
- This class gives you access to all the features of the SDK and allows you
- to configure or customize the SDK. Use the `+[SCServiceCloud sharedInstance]`
- class method to access the singleton for this class.
- 
+ Use the `+[SCServiceCloud sharedInstance]` class method to access the singleton
+ for this class.
  You can access each of the SDK features with properties on this singleton:
  `SCServiceCloud.knowledge`, `SCServiceCloud.cases`, `SCServiceCloud.chat`,
  `SCServiceCloud.sos`.
  
- Specify your `SCServiceCloudDelegate` implementation using the
- `SCServiceCloud.delegate` property. With this delegate, you can respond
- to events and make decisions on behalf of the SDK.
- 
- ### Configuration
- 
- Customize the appearance of the interface (such as the fonts, images, and strings)
- using the `SCServiceCloud.appearanceConfiguration` property. Specify the
- Knowledge and Case Management configuration settings using
- the `SCServiceCloud.serviceConfiguration` property.
- 
- ### Authentication & Notifications
- 
- Knowledge and Case Management both have an option to authenticate users
- so that users can access information related to their user account or
- their user profile. To learn more about authentication, see [Authentication](../authentication.html).
- 
- `SCServiceCloud` allows you to explicitly set the authentication settings using
- `-setAuthenticationSettings:forServiceType:completion:`. You can also check the
- authentication for a particular service using `-authenticationSettingsForServiceType:`.
- Refer to `SCSAuthenticationSettings` for the core class associated with authentication.
- 
- Authenticated users can be notified using push notifications when there is activity
- on their cases. To learn more about notifications see [Push Notifications for Case Activity](https://developer.salesforce.com/docs/atlas.en-us.service_sdk_ios.meta/service_sdk_ios/cases_push_notification.htm).
- 
- `SCServiceCloud` lets you determine whether the SDK can handle a remote push notification with
- `-notificationFromRemoteNotificationDictionary:`. If the notification
- can be handled by the SDK, pass it to the `-showInterfaceForNotification:` method.
- 
- ### Action Buttons
- 
- You can customize the action buttons used throughout the UI. You can override the look
- and the behavior of existing buttons, and you can create buttons associated with new actions.
- Use the `SCServiceCloud.actions` property to get access to `SCSActionManager` and the action button API.
- 
- @see `SCServiceCloudDelegate`
+ Configure the SDK using the `SCServiceCloud.serviceConfiguration` property.
+ Customize the appearance of the interface using the
+ `SCServiceCloud.appearanceConfiguration` property.
  */
 NS_SWIFT_NAME(ServiceCloud)
 @interface SCServiceCloud : NSObject
@@ -91,13 +54,6 @@ NS_SWIFT_NAME(ServiceCloud)
  @return Initialized shared instace.
  */
 + (instancetype)sharedInstance NS_SWIFT_NAME(shared());
-
-/**
- Directory URL where shared files will be stored on the filesystem.  If `nil`, the system will supply the appropriate path given the application context.  This value should be used if Snap-ins features will be accessible from multiple extensions within your application to ensure data is stored in a location accessible to all app extensions.
- 
- @warning *NOTE* This value must be set prior to the initialization of any system resources or classes utilizing Snap-ins features.  The behavior is undefined if the value is changed after the fact.
- */
-@property (class, nullable, nonatomic, copy) NSURL *sharedDataDirectory;
 
 /**
  Identifies the primary window where view controllers should be placed when
