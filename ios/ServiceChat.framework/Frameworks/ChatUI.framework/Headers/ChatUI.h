@@ -22,6 +22,4 @@
  * DAMAGES.
  */
 
-#import "SCSChatInterface.h"
 #import "SCSChatUIDefines.h"
-#import "SCServiceCloud+ChatUI.h"

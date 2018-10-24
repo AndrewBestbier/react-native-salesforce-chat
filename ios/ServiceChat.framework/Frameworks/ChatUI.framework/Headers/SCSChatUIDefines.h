@@ -30,8 +30,6 @@ SC_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenDropdown;
 SC_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenChatConnectingIcon;
 SC_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenChatConnectingIconLarge;
 SC_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenErrorLarge;
-SC_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenChatBotFooterMenu;
-SC_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenChatBotAvatar;
 
 // Deprecated mappings
 #define SCS_API_DEPRECATED_WITH_REPLACEMENT(__name) __API_DEPRECATED_WITH_REPLACEMENT(__name, ios(1.0,1.0))

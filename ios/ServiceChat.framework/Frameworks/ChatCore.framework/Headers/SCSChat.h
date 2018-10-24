@@ -26,7 +26,6 @@
 
 @class SCSChat;
 @class SCSChatConfiguration;
-@class UNNotification;
 @protocol SCSChatDelegate;
 
 /**
@@ -61,10 +60,6 @@ typedef void (^SCSChatAvailabilityHandler)(NSError *error, BOOL available);
  `SCSChat` conforms to a multicast delegate model for messaging. Any class which
  implements the `SCSChatDelegate` protocol can be added to a list of delegates to
  receive messages asynchronously.
- 
- For UI-related chat features like notifications, see `SCSChatInterface`.
- 
- @see `SCSChatInterface`
  */
 @interface SCSChat : NSObject
 
