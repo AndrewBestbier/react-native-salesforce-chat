@@ -11,21 +11,26 @@ SCSChatConfiguration *chatConfiguration;
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(configLaunch:(NSString *)subject origin:(NSString *)origin currencyISOCode: (NSString *)currencyISOCode status: (NSString *)status contactType:(NSString *)contactType locale:(NSString *)locale suppliedEmail:(NSString *)suppliedEmail email:(NSString *)email suppliedName:(NSString *)suppliedName)
+RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings: (NSDictionary *)userSettings)
 {
     prechatEntities = [NSMutableArray array];
 
     // Prechat fields
     prechatFields = @[
-      [[SCSPrechatObject alloc] initWithLabel:@"Origin" value: origin],
-      [[SCSPrechatObject alloc] initWithLabel:@"CurrencyISOCode" value: currencyISOCode],
-      [[SCSPrechatObject alloc] initWithLabel:@"Status" value: status],
-      [[SCSPrechatObject alloc] initWithLabel:@"ContactType__c" value: contactType],
-      [[SCSPrechatObject alloc] initWithLabel:@"Locale__c" value: locale],
-      [[SCSPrechatObject alloc] initWithLabel:@"SuppliedName" value: suppliedName],
-      [[SCSPrechatObject alloc] initWithLabel:@"SuppliedEmail" value: suppliedEmail],
-      [[SCSPrechatObject alloc] initWithLabel:@"Email" value: email],
-      [[SCSPrechatObject alloc] initWithLabel:@"Subject" value: subject],
+      [[SCSPrechatObject alloc] initWithLabel:@"Origin" value: chatSettings[@"origin"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"CurrencyISOCode" value: chatSettings[@"currencyISOCode"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"Status" value: chatSettings[@"status"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"ContactType__c" value: chatSettings[@"contactType"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"Locale__c" value: chatSettings[@"locale"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"Subject" value: chatSettings[@"subject"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"CanTroubleshootingbedone__c" value: chatSettings[@"canTSBeDone"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"ProductV2__c" value: chatSettings[@"type"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"EquipmentV2__c" value: chatSettings[@"subject"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"Version__c" value: chatSettings[@"model"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"PointOfCustomerJourney__c" value: chatSettings[@"pointOfUserJourney"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"SuppliedName" value: userSettings[@"suppliedName"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"SuppliedEmail" value: userSettings[@"suppliedEmail"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"Email" value: userSettings[@"email"]],
     ];
 
     // Prechat entities
@@ -38,7 +43,12 @@ RCT_EXPORT_METHOD(configLaunch:(NSString *)subject origin:(NSString *)origin cur
          [[SCSPrechatEntityField alloc] initWithFieldName:@"Locale__c" label:@"Locale__c"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"SuppliedName" label:@"SuppliedName"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"SuppliedEmail" label:@"SuppliedEmail"],
-         [[SCSPrechatEntityField alloc] initWithFieldName:@"Email" label:@"Email"]
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"Email" label:@"Email"],
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"CanTroubleshootingbedone__c" label:@"CanTroubleshootingbedone__c"],
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"ProductV2__c" label:@"ProductV2__c"],
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"EquipmentV2__c" label:@"EquipmentV2__c"],
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"Version__c" label:@"Version__c"],
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"PointOfCustomerJourney__c" label:@"PointOfCustomerJourney__c"]
     ];
 
     for (SCSPrechatEntityField* entityField in caseEntityFields) {
