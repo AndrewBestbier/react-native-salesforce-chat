@@ -79,7 +79,7 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
         PreChatField pointOfUserJourney = new PreChatField.Builder().hidden(true)
                 .value(chatSettings.getString("pointOfUserJourney")).build("PointOfCustomerJourney__c", "PointOfCustomerJourney__c", PreChatField.STRING);
         PreChatField suppliedEmail = new PreChatField.Builder().hidden(true)
-                .value(userSettings.getString("suppliedEmail")).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
+                .value(userSettings.getString("email")).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
         PreChatField suppliedName = new PreChatField.Builder().hidden(true)
                 .value(userSettings.getString("suppliedName")).build("SuppliedName", "SuppliedName", PreChatField.STRING);
         //An unique identification of an engineer

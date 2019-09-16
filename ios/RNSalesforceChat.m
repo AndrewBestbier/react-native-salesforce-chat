@@ -29,7 +29,7 @@ RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings: (NSDic
       [[SCSPrechatObject alloc] initWithLabel:@"Version__c" value: chatSettings[@"model"]],
       [[SCSPrechatObject alloc] initWithLabel:@"PointOfCustomerJourney__c" value: chatSettings[@"pointOfUserJourney"]],
       [[SCSPrechatObject alloc] initWithLabel:@"SuppliedName" value: userSettings[@"suppliedName"]],
-      [[SCSPrechatObject alloc] initWithLabel:@"SuppliedEmail" value: userSettings[@"suppliedEmail"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"SuppliedEmail" value: userSettings[@"email"]],
       [[SCSPrechatObject alloc] initWithLabel:@"Email" value: userSettings[@"email"]],
     ];
 
