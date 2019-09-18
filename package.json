@@ -1,12 +1,18 @@
 {
   "name": "react-native-salesforce-chat",
-  "version": "0.8.1",
+  "version": "1.0.0",
   "description": "React native support for Salesforce live chat",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndrewBestbier/react-native-salesforce-chat"
   },
-  "keywords": ["react-native", "react", "android", "ios", "chat"],
+  "keywords": [
+    "react-native",
+    "react",
+    "android",
+    "ios",
+    "chat"
+  ],
   "peerDependencies": {
     "react-native": "^0.41.2"
   },

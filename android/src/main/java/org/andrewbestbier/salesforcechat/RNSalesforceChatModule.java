@@ -10,6 +10,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 
 import com.salesforce.android.chat.core.ChatConfiguration;
 import com.salesforce.android.chat.core.model.AvailabilityState;
@@ -49,33 +50,43 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public void configLaunch(String SUBJECT, String ORIGIN, String CURRENCY_ISO_CODE, String STATUS, String CONTACT_TYPE, String LOCALE_C, String SUPPLIED_EMAIL, String EMAIL, String USER_COMPLETE_NAME) {
+    public void configLaunch(ReadableMap chatSettings, ReadableMap userSettings) {
 
         preChatFields.clear();
         preChatEntities.clear();
 
         // Some required fields (Hidden)
         PreChatField subject = new PreChatField.Builder().hidden(true)
-                .value(SUBJECT).build("Subject", "Subject", PreChatField.STRING);
+                .value(chatSettings.getString("subject")).build("Subject", "Subject", PreChatField.STRING);
         PreChatField origin = new PreChatField.Builder().hidden(true)
-                .value(ORIGIN).build("Origin", "Origin", PreChatField.STRING);
+                .value(chatSettings.getString("origin")).build("Origin", "Origin", PreChatField.STRING);
         PreChatField currency = new PreChatField.Builder().hidden(true)
-                .value(CURRENCY_ISO_CODE).build("CurrencyIsoCode", "CurrencyIsoCode", PreChatField.STRING);
+                .value(chatSettings.getString("currencyISOCode")).build("CurrencyIsoCode", "CurrencyIsoCode", PreChatField.STRING);
         PreChatField status = new PreChatField.Builder().hidden(true)
-                .value(STATUS).build("Status", "Status", PreChatField.STRING); //Hardcoded
+                .value(chatSettings.getString("status")).build("Status", "Status", PreChatField.STRING); //Hardcoded
         PreChatField contactType = new PreChatField.Builder().hidden(true)
-                .value(CONTACT_TYPE).build("ContactType__c", "ContactType__c", PreChatField.STRING); //Hardcoded
+                .value(chatSettings.getString("contactType")).build("ContactType__c", "ContactType__c", PreChatField.STRING); //Hardcoded
         PreChatField locale = new PreChatField.Builder().hidden(true)
-                .value(LOCALE_C).build("Locale__c", "Locale__c", PreChatField.STRING);
+                .value(chatSettings.getString("locale")).build("Locale__c", "Locale__c", PreChatField.STRING);
+        PreChatField canTSBeDone = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("canTSBeDone")).build("CanTroubleshootingbedone__c", "CanTroubleshootingbedone__c", PreChatField.STRING);
+        PreChatField product = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("product")).build("ProductV2__c", "ProductV2__c", PreChatField.STRING);
+        PreChatField equipment = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("equipment")).build("EquipmentV2__c", "EquipmentV2__c", PreChatField.STRING);
+        PreChatField version = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("version")).build("Version__c", "Version__c", PreChatField.STRING);
+        PreChatField pointOfUserJourney = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("pointOfUserJourney")).build("PointOfCustomerJourney__c", "PointOfCustomerJourney__c", PreChatField.STRING);
         PreChatField suppliedEmail = new PreChatField.Builder().hidden(true)
-                .value(SUPPLIED_EMAIL).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
+                .value(userSettings.getString("email")).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
         PreChatField suppliedName = new PreChatField.Builder().hidden(true)
-                .value(USER_COMPLETE_NAME).build("SuppliedName", "SuppliedName", PreChatField.STRING);
+                .value(userSettings.getString("name")).build("SuppliedName", "SuppliedName", PreChatField.STRING);
         //An unique identification of an engineer
 
         // Some optional fields (Hidden)
         PreChatField email = new PreChatField.Builder().hidden(true)
-                .value(EMAIL).build("Email", "Email", PreChatField.EMAIL);
+                .value(userSettings.getString("email")).build("Email", "Email", PreChatField.EMAIL);
         //An unique identification of an engineer
 
         // Add the fields to the list
@@ -88,6 +99,11 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
         preChatFields.add(suppliedEmail);
         preChatFields.add(suppliedName);
         preChatFields.add(email);
+        preChatFields.add(canTSBeDone);
+        preChatFields.add(product);
+        preChatFields.add(equipment);
+        preChatFields.add(version);
+        preChatFields.add(pointOfUserJourney);
 
 
         // Create an entity field builder for Case fields
@@ -103,8 +119,14 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
                 .addPreChatEntityField(caseEntityBuilder.build("Status", "Status"))
                 .addPreChatEntityField(caseEntityBuilder.build("ContactType__c", "ContactType__c"))
                 .addPreChatEntityField(caseEntityBuilder.build("Locale__c", "Locale__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("Email", "Email"))
                 .addPreChatEntityField(caseEntityBuilder.build("SuppliedEmail", "SuppliedEmail"))
                 .addPreChatEntityField(caseEntityBuilder.build("SuppliedName", "SuppliedName"))
+                .addPreChatEntityField(caseEntityBuilder.build("CanTroubleshootingbedone__c", "CanTroubleshootingbedone__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("ProductV2__c", "ProductV2__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("EquipmentV2__c", "EquipmentV2__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("Version__c", "Version__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("PointOfCustomerJourney__c", "PointOfCustomerJourney__c"))
                 .build("Case");
         // Add the entities to the list
         preChatEntities.add(caseEntity);
