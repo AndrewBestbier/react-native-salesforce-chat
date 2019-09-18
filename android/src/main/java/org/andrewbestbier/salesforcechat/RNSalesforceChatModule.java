@@ -70,18 +70,18 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
                 .value(chatSettings.getString("locale")).build("Locale__c", "Locale__c", PreChatField.STRING);
         PreChatField canTSBeDone = new PreChatField.Builder().hidden(true)
                 .value(chatSettings.getString("canTSBeDone")).build("CanTroubleshootingbedone__c", "CanTroubleshootingbedone__c", PreChatField.STRING);
-        PreChatField type = new PreChatField.Builder().hidden(true)
-                .value(chatSettings.getString("type")).build("ProductV2__c", "ProductV2__c", PreChatField.STRING);
         PreChatField product = new PreChatField.Builder().hidden(true)
-                .value(chatSettings.getString("subject")).build("EquipmentV2__c", "EquipmentV2__c", PreChatField.STRING);
-        PreChatField model = new PreChatField.Builder().hidden(true)
-                .value(chatSettings.getString("model")).build("Version__c", "Version__c", PreChatField.STRING);
+                .value(chatSettings.getString("product")).build("ProductV2__c", "ProductV2__c", PreChatField.STRING);
+        PreChatField equipment = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("equipment")).build("EquipmentV2__c", "EquipmentV2__c", PreChatField.STRING);
+        PreChatField version = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("version")).build("Version__c", "Version__c", PreChatField.STRING);
         PreChatField pointOfUserJourney = new PreChatField.Builder().hidden(true)
                 .value(chatSettings.getString("pointOfUserJourney")).build("PointOfCustomerJourney__c", "PointOfCustomerJourney__c", PreChatField.STRING);
         PreChatField suppliedEmail = new PreChatField.Builder().hidden(true)
                 .value(userSettings.getString("email")).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
         PreChatField suppliedName = new PreChatField.Builder().hidden(true)
-                .value(userSettings.getString("suppliedName")).build("SuppliedName", "SuppliedName", PreChatField.STRING);
+                .value(userSettings.getString("name")).build("SuppliedName", "SuppliedName", PreChatField.STRING);
         //An unique identification of an engineer
 
         // Some optional fields (Hidden)
@@ -100,9 +100,9 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
         preChatFields.add(suppliedName);
         preChatFields.add(email);
         preChatFields.add(canTSBeDone);
-        preChatFields.add(type);
         preChatFields.add(product);
-        preChatFields.add(model);
+        preChatFields.add(equipment);
+        preChatFields.add(version);
         preChatFields.add(pointOfUserJourney);
 
 
@@ -119,6 +119,7 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
                 .addPreChatEntityField(caseEntityBuilder.build("Status", "Status"))
                 .addPreChatEntityField(caseEntityBuilder.build("ContactType__c", "ContactType__c"))
                 .addPreChatEntityField(caseEntityBuilder.build("Locale__c", "Locale__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("Email", "Email"))
                 .addPreChatEntityField(caseEntityBuilder.build("SuppliedEmail", "SuppliedEmail"))
                 .addPreChatEntityField(caseEntityBuilder.build("SuppliedName", "SuppliedName"))
                 .addPreChatEntityField(caseEntityBuilder.build("CanTroubleshootingbedone__c", "CanTroubleshootingbedone__c"))
