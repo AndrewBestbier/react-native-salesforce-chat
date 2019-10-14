@@ -26,22 +26,8 @@
 #import <Foundation/Foundation.h>
 #endif
 
-static NSString * const kLiveAgentAPIVersion = @"36";
-
 #ifdef __APPLE__
 #import "TargetConditionals.h"
-#endif
-
-#ifdef safeReference
-#undef safeReference
-#endif
-
-#ifdef safeBlock
-#undef safeBlock
-#endif
-
-#ifdef executeAndDeleteBlock
-#undef executeAndDeleteBlock
 #endif
 
 #ifdef LOG
@@ -51,17 +37,6 @@ static NSString * const kLiveAgentAPIVersion = @"36";
 #ifdef ABSTRACT_NOT_IMPLEMENTED
 #undef ABSTRACT_NOT_IMPLEMENTED
 #endif
-
-#define safeReference(value) value ?: [NSNull null]
-
-#pragma GCC diagnostic ignored "-Wvariadic-macros"
-#define safeBlock(block, args...) if (block) { \
-block(args); \
-}
-
-#define executeAndDeleteBlock(block, args...) safeBlock(block, args); \
-block = nil
-
 
 #if DEBUG
 #define LOG(...) NSLog(__VA_ARGS__)

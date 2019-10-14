@@ -31,7 +31,7 @@
  * This object must be added to the options array on an `SCSPrechatPickerObject`.
  */
 
-@interface SCSPrechatPickerOption : NSObject
+@interface SCSPrechatPickerOption : NSObject <NSCopying>
 
 ///---------------------------------
 /// @name Properties

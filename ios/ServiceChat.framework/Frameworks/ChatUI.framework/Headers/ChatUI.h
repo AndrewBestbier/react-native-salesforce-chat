@@ -23,3 +23,5 @@
  */
 
 #import "SCSChatUIDefines.h"
+#import "SCServiceCloud+ChatUI.h"
+#import "SCSChatInterface.h"

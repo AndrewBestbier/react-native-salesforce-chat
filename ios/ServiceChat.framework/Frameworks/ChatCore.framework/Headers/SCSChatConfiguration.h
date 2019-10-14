@@ -23,36 +23,33 @@
  */
 
 #import <Foundation/Foundation.h>
+@import ServiceCore.ServiceCommon.SCCDefines;
 
 @class SCSPrechatObject;
 @class SCSPrechatEntity;
+
+/**
+ Queue information display style. This value determines how information is
+ presented to the user while waiting for an agent.
+ 
+ @see `SCSChatConfiguration.queueStyle`
+ */
+typedef NS_ENUM(NSUInteger, SCSChatConfigurationQueueStyle) {
+    /** Don't display any queue information to the user. */
+    SCSChatConfigurationQueueStyleNone,
+    
+    /** Display the position number in the queue. */
+    SCSChatConfigurationQueueStylePosition,
+    
+    /** Display the estimated wait time in the queue. */
+    SCSChatConfigurationQueueStyleEstimatedWaitTime,
+};
 
 /**
  A `SCSChatConfiguration` object contains configuration information for a
  Live Agent Chat session.
  */
 @interface SCSChatConfiguration : NSObject <NSCopying>
-
-/**
- Describes how a chat session is presented.
- */
-typedef NS_ENUM(NSUInteger, SCSChatPresentationStyle) {
-    /**
-     Present chat session in full-screen mode.
-
-     Sets `allowMinimization=NO, defaultToMinimized=NO, & fullscreenPrechat=YES`
-     */
-    SCSChatPresentationStyleFullscreen = 1,
-
-    /**
-     Present chat session in non-blocking mode.
-
-     Sets `allowMinimization=YES, defaultToMinimized=YES, & fullscreenPrechat=NO`
-     */
-    SCSChatPresentationStyleNonBlocking
-}
-NS_SWIFT_UNAVAILABLE("Use allowMinimization, defaultToMinimized, and fullscreenPrechat instead")
-__deprecated_enum_msg("Use allowMinimization, defaultToMinimized, and fullscreenPrechat instead");
 
 ///---------------------------------
 /// @name Initialization
@@ -116,13 +113,13 @@ __deprecated_enum_msg("Use allowMinimization, defaultToMinimized, and fullscreen
  An array of `SCSPrechatObject` objects defining the custom information
  this session will provide.
  */
-@property (nonatomic, readonly, strong) NSMutableArray<SCSPrechatObject*> *prechatFields;
+@property (nonatomic, readwrite, copy) NSArray<SCSPrechatObject*> *prechatFields;
 
 /**
  An array of `SCSPrechatEntity` objects defining the mappings of custom
  information from this session to salesforce objects.
  */
-@property (nonatomic, readonly, strong) NSMutableArray<SCSPrechatEntity*> *prechatEntities;
+@property (nonatomic, readwrite, copy) NSArray<SCSPrechatEntity*> *prechatEntities;
 
 /**
  Name of the chat visitor for Service Cloud agent & console to consume.
@@ -132,20 +129,20 @@ __deprecated_enum_msg("Use allowMinimization, defaultToMinimized, and fullscreen
 @property (nonatomic, copy) NSString *visitorName;
 
 /**
- Defines how the Live Agent Chat session is presented when it starts.
-
- Defaults to `SCSChatPresentationStyleNonBlocking`.
- */
-@property (nonatomic, assign) SCSChatPresentationStyle presentationStyle
-    NS_SWIFT_UNAVAILABLE("Use allowMinimization, defaultToMinimized, and fullscreenPrechat instead")
-    __deprecated_msg("Use allowMinimization, defaultToMinimized, and fullscreenPrechat instead");
-
-/**
  Determines whether the framework receives and displays updates about the session queue position.
  
  Defaults to `YES`.
  */
-@property (nonatomic, assign) BOOL queueUpdatesEnabled;
+@property (nonatomic, assign) BOOL queueUpdatesEnabled SCS_API_DEPRECATED_WITH_REPLACEMENT("queueStyle");
+
+/**
+ Specifies the way queue updates are conveyed to the user while waiting in a queue.
+ 
+ Defaults to `SCSChatConfigurationQueueStylePosition`.
+ 
+ @see `SCSChatConfigurationQueueStyle`
+ */
+@property (nonatomic, assign) SCSChatConfigurationQueueStyle queueStyle;
 
 /**
  Determines whether session logs are sent for collection.
@@ -156,6 +153,22 @@ __deprecated_enum_msg("Use allowMinimization, defaultToMinimized, and fullscreen
  Default to `YES`.
  */
 @property (nonatomic) BOOL remoteLoggingEnabled;
+
+/**
+ Determines whether the session will use UIApplication's beginBackgroundTask API
+ to allow for extended background execution to allow for reduced session timeouts.
+
+ Default to `YES`.
+ */
+@property (nonatomic, assign) BOOL allowBackgroundExecution;
+
+/**
+ Determines whether the session will use UserNotifications to post local notifications
+ on selected chat events. Requires allowBackgroundExecution to be set to YES.
+
+ Default to `YES`.
+ */
+@property (nonatomic, assign) BOOL allowBackgroundNotifications;
 
 ///---------------------------------
 /// @name User Interface Behavior
@@ -176,10 +189,24 @@ __deprecated_enum_msg("Use allowMinimization, defaultToMinimized, and fullscreen
 @property (nonatomic, assign) BOOL defaultToMinimized;
 
 /**
- Defines whether the prechat screen is presented as a modal or fullscreen view controller.
-
- Defaults to `NO`.
+ Defines whether the user is shown URL previews when the agent types a URL in the chat feed.
+ 
+ Defaults to `YES`.
  */
-@property (nonatomic, assign) BOOL fullscreenPrechat;
+@property (nonatomic, assign) BOOL allowURLPreview;
+
+/**
+ The minimum estimated wait time value (in seconds) to display to the user. Only applicable when queueStyle is set to SCSChatConfigurationQueueStyleEstimatedWaitTime.
+
+ Default: `60.0`
+ */
+@property (nonatomic, assign) NSTimeInterval minimumEstimatedWaitTime;
+
+/**
+ The maximum estimated wait time value (in seconds) to display to the user. Only applicable when queueStyle is set to SCSChatConfigurationQueueStyleEstimatedWaitTime.
+
+ Default: `600.0`
+ */
+@property (nonatomic, assign) NSTimeInterval maximumEstimatedWaitTime;
 
 @end

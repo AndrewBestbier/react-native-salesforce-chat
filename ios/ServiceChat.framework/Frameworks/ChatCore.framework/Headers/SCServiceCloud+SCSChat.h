@@ -30,13 +30,14 @@
 /**
  *  Interface for accessing the <SCSChat> instance via the Service Common singleton manager.
  */
-@interface SCServiceCloud(LiveAgentChat)
+@interface SCServiceCloud (ChatCore)
 
 /**
- *  The singleton instance for Live Agent Chat.
- *
- *  @see `SCSChat`
+ The singleton instance of the chat core interface.
+ For access to the chat user interface, see `SCServiceCloud.chatUI`.
+
+ @see `SCSChat`
  */
-@property (nonatomic, strong, readonly) SCSChat *chat;
+@property (nonatomic, strong, readonly) SCSChat *chatCore;
 
 @end

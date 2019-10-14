@@ -22,27 +22,18 @@
  * DAMAGES.
  */
 
+#import <Foundation/Foundation.h>
+
 /**
- * Full list of Session states the Live Agent Chat framework can exhibit.
+ * Complete list of chat session states.
  *
- * @see `-[SCSChatDelegate chat:stateDidChange:previous:]`
+ * @see `-[SCSChatSessionDelegate session:didTransitionFromState:toState:]`
  */
-
-typedef NS_ENUM(NSInteger, SCSChatSessionState) {
+typedef NS_ENUM(NSUInteger, SCSChatSessionState) {
     /**
-     *  No active session. There will be no outgoing/incoming Chat traffic.
+     *  No active session. There will be no outgoing/incoming chat traffic.
      */
-    SCSChatSessionStateInactive = 0,
-
-    /**
-     *  Session is being loaded to begin connection process.
-     */
-    SCSChatSessionStateLoading,
-
-    /**
-     *  Prechat details are being filled out by the end-user.
-     */
-    SCSChatSessionStatePrechat,
+    SCSChatSessionStateInactive,
 
     /**
      *  A connection with Live Agent servers is being established.
@@ -63,9 +54,4 @@ typedef NS_ENUM(NSInteger, SCSChatSessionState) {
      *  Session is in the process of cleaning up network connections and ending.
      */
     SCSChatSessionStateEnding,
-
-    /**
-     *  Session has ended. Will proceed to the inactive state.
-     */
-    SCSChatSessionStateEnded
 };

@@ -69,6 +69,11 @@
  */
 @property (nonatomic) UITextAutocorrectionType autocorrectionType;
 
+/**
+ The inital value for the field.
+ */
+@property (nonatomic, copy) NSString *initialValue;
+
 ///---------------------------------
 /// @name Initialization
 ///---------------------------------
