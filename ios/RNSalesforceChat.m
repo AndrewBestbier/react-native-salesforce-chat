@@ -84,28 +84,29 @@ RCT_EXPORT_METHOD(configChat:(NSString *)orgId deploymentId:(NSString *)deployme
                                               buttonId: buttonId];
 
     chatConfiguration.visitorName = suppliedName;
-    [chatConfiguration.prechatFields addObjectsFromArray:prechatFields];
-    [chatConfiguration.prechatEntities addObjectsFromArray:prechatEntities];
-
+    chatConfiguration.prechatFields = [[NSArray new] arrayByAddingObjectsFromArray:prechatFields];
+    chatConfiguration.prechatEntities = [[NSArray new] arrayByAddingObjectsFromArray:prechatEntities];
 }
 
 RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
 {
-    [[SCServiceCloud sharedInstance].chat
-     determineAvailabilityWithConfiguration:chatConfiguration
-     completion:^(NSError *error, BOOL available) {
+    [[SCServiceCloud sharedInstance].chatUI showChatWithConfiguration:chatConfiguration];
 
-         if (error != nil) {
-             // Handle error
-         }
-         else if (available) {
-             [[SCServiceCloud sharedInstance].chat startSessionWithConfiguration:chatConfiguration];
-         }
-         else {
-             // Disable button or warn user that no agents are available
-             callback(@[[NSNull null]]);
-         }
-     }];
+//    [[SCServiceCloud sharedInstance].chat
+//     determineAvailabilityWithConfiguration:chatConfiguration
+//     completion:^(NSError *error, BOOL available) {
+//
+//         if (error != nil) {
+//             // Handle error
+//         }
+//         else if (available) {
+//             [[SCServiceCloud sharedInstance].chat startSessionWithConfiguration:chatConfiguration];
+//         }
+//         else {
+//             // Disable button or warn user that no agents are available
+//             callback(@[[NSNull null]]);
+//         }
+//     }];
 }
 
 @end
