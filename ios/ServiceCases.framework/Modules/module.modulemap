@@ -1,0 +1,28 @@
+framework module ServiceCases {
+    umbrella header "ServiceCases.h"
+
+    export *
+    module * { export * }
+
+    framework module CaseCore {
+        umbrella header "CaseCore.h"
+        export *
+        module * { export * }
+    }
+
+    framework module CaseUI {
+        umbrella header "CaseUI.h"
+        export *
+        module * { export * }
+    }
+
+    link framework "UIKit"
+    link framework "SystemConfiguration"
+    link framework "CoreGraphics"
+
+    link "System"
+    link "sqlite3"
+    link "z"
+
+    use ServiceCore
+}

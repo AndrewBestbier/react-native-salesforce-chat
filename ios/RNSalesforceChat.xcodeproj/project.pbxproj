@@ -10,6 +10,7 @@
 		B3E7B58A1CC2AC0600A0062D /* RNSalesforceChat.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNSalesforceChat.m */; };
 		ED1339E1235F07C9006FF04E /* ServiceChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1339DF235F07C9006FF04E /* ServiceChat.framework */; };
 		ED1339E2235F07C9006FF04E /* ServiceCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1339E0235F07C9006FF04E /* ServiceCore.framework */; };
+		ED1339E7235F30CB006FF04E /* ServiceCases.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1339E6235F30CB006FF04E /* ServiceCases.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 		B3E7B5891CC2AC0600A0062D /* RNSalesforceChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSalesforceChat.m; sourceTree = "<group>"; };
 		ED1339DF235F07C9006FF04E /* ServiceChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ServiceChat.framework; sourceTree = "<group>"; };
 		ED1339E0235F07C9006FF04E /* ServiceCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ServiceCore.framework; sourceTree = "<group>"; };
+		ED1339E6235F30CB006FF04E /* ServiceCases.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ServiceCases.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1339E7235F30CB006FF04E /* ServiceCases.framework in Frameworks */,
 				ED1339E1235F07C9006FF04E /* ServiceChat.framework in Frameworks */,
 				ED1339E2235F07C9006FF04E /* ServiceCore.framework in Frameworks */,
 			);
@@ -56,6 +59,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				ED1339E6235F30CB006FF04E /* ServiceCases.framework */,
 				ED1339DF235F07C9006FF04E /* ServiceChat.framework */,
 				ED1339E0235F07C9006FF04E /* ServiceCore.framework */,
 				B3E7B5881CC2AC0600A0062D /* RNSalesforceChat.h */,
