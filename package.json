@@ -18,5 +18,6 @@
   },
   "author": "Andrew Bestbier <andrew.bestbier@gmail.com>",
   "license": "MIT",
-  "nativePackage": true
+  "nativePackage": true,
+  "homepage": "https://github.com/AndrewBestbier/react-native-salesforce-chat#readme"
 }
