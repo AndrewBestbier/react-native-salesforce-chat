@@ -13,10 +13,11 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
 
   s.source       = { :git => "https://github.com/AndrewBestbier/react-native-salesforce-chat", :tag => "v#{s.version}" }
+  s.source       = { :git => "https://github.com/forcedotcom/SalesforceMobileSDK-iOS-Specs.git" }
   s.source       = { :git => "https://github.com/CocoaPods/Specs.git" }
-  s.source       = { :git => "https://github.com/goinstant/pods-specs-public" }
   s.source_files  = "ios/**/*.{h,m}"
 
   s.dependency 'React'
+  s.dependency 'SalesforceSDKCore'
   s.ios.vendored_frameworks = 'ios/ServiceChat.framework', 'ios/ServiceCore.framework'
 end
