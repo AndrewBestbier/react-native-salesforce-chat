@@ -32,8 +32,8 @@
  *  If there is an error thrown by a library dependency it will be included as metadata
  *  in the userInfo of the error which is returned to the application code.
  *
- *  @see `-[SCSChatDelegate chat:didError:]`
- *  @see `-[SCSChatDelegate chat:didEndWithReason:error:]`
+ *  @see `-[SCSChatSessionDelegate session:didError:fatal:]`
+ *  @see `-[SCSChatSessionDelegate session:didEndWithReason:]`
  */
 typedef NS_ENUM(NSInteger, SCSChatErrorCode) {
     ///--------------------------------
@@ -82,5 +82,14 @@ typedef NS_ENUM(NSInteger, SCSChatErrorCode) {
     /**
      *  Returned when attempting to perform an action in an established session and a network error occurs.
      */
-    SCSChatSessionEventError = 2003
+    SCSChatSessionEventError = 2003,
+
+    ///--------------------------------
+    /// @name File Transfer Errors (3000-series)
+    ///--------------------------------
+
+    /**
+     * Returned when an attempted file transfer fails.
+     */
+    SCSChatFileTransferError = 3000
 };

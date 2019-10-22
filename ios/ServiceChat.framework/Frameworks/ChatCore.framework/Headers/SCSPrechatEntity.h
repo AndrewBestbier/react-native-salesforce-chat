@@ -33,7 +33,7 @@
  This object must be added to your chat configuration using
  `SCSChatConfiguration.prechatEntities`.
  */
-@interface SCSPrechatEntity : NSObject
+@interface SCSPrechatEntity : NSObject<NSCopying>
 
 /**
  Name of the salesforce object being created or found. eg. Case or Contact

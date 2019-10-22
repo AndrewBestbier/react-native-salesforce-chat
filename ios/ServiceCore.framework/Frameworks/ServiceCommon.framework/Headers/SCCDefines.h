@@ -39,6 +39,7 @@
 #define NS_STRING_ENUM
 #endif
 
+#ifndef SCS_STRING_ENUM
 #ifdef NS_TYPED_EXTENSIBLE_ENUM
 #define SCS_EXTENSIBLE_STRING_ENUM NS_TYPED_EXTENSIBLE_ENUM
 #define SCS_STRING_ENUM NS_TYPED_ENUM
@@ -46,10 +47,14 @@
 #define SCS_EXTENSIBLE_STRING_ENUM NS_EXTENSIBLE_STRING_ENUM
 #define SCS_STRING_ENUM NS_STRING_ENUM
 #endif
+#endif
 
 SCS_EXTERN NSString * const SCInterfaceStyleDefault;
 
-// Authentication
+/**
+ Service feature area. This value can be `SCServiceTypeCases` or `SCServiceTypeKnowledge`.
+ To learn how this is used for authentication, see [Authentication](./authentication.html).
+ */
 typedef NSString * SCServiceType SCS_STRING_ENUM;
 SCS_EXTERN SCServiceType const SCServiceTypeCases;
 SCS_EXTERN SCServiceType const SCServiceTypeKnowledge;
@@ -82,6 +87,10 @@ typedef NS_ENUM(NSInteger, SCServiceErrorCode) {
     SCServiceAuthenticationSettingsError = 1000,
 };
 
+/**
+ Enumerated list of all configurable color tokens.
+ To learn about color branding, see [Color Branding](./color-branding.html).
+ */
 typedef NSString * SCSAppearanceColorToken SCS_STRING_ENUM;
 
 /// The brand primary color key, used for primary visual elements such as header colors.
@@ -133,6 +142,9 @@ SCS_EXTERN SCSAppearanceColorToken const SCSAppearanceColorTokenOverlay;
 
 
 #ifndef SCSAppearanceImageToken
+/**
+ Enumerated list of all configurable image tokens.
+ */
 typedef NSString * SCSAppearanceImageToken SCS_STRING_ENUM;
 #endif
 
@@ -150,13 +162,16 @@ SCS_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenNoAccess;
 SCS_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenCountBadgeBackground;
 SCS_EXTERN SCSAppearanceImageToken const SCSAppearanceImageTokenSend;
 
-/// Branding text label constant names
+/**
+ Enumerated list of all configurable text label tokens.
+ */
 typedef NSString * SCSAppearanceLabelToken SCS_STRING_ENUM;
 
 SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenArticleListTitle;
 SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenArticleListSummary;
 SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenCategoryListTitle;
 SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenCaseFeedItemBody;
+SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenCategorySupportHomeTitle;
 
 // Case branding tokens
 SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenCaseListTitle;
@@ -166,8 +181,9 @@ SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenCaseDetailTitle;
 SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenCaseDetailSubtitle;
 SCS_EXTERN SCSAppearanceLabelToken const SCSAppearanceLabelTokenCaseFeedTitle;
 
-// Actions
-
+/**
+ Enumerated list of all configurable action types.
+ */
 typedef NSString * SCSAction SCS_EXTENSIBLE_STRING_ENUM;
 
 SCS_EXTERN SCSAction const SCSActionCaseInterface;
@@ -176,13 +192,15 @@ SCS_EXTERN SCSAction const SCSActionCaseList;
 SCS_EXTERN SCSAction const SCSActionArticleSearch;
 SCS_EXTERN SCSAction const SCSActionChatInterface;
 
-// Default sort indexes for the built-in action items.
-typedef enum : NSUInteger {
+/**
+ Default sort index values for the built-in action items.
+ */
+typedef NS_ENUM(NSUInteger, SCSActionItemDefaultSort) {
     SCSActionItemDefaultSortArticleSearch = 10,
     SCSActionItemDefaultSortCaseInterface = 20,
     SCSActionItemDefaultSortChatInterface = 30,
     SCSActionItemDefaultSortSOSInterface  = 40,
-} SCSActionItemDefaultSort;
+};
 
 // Notifications
 SCS_EXTERN NSString * const SCSAuthenticationSettingsUpdatedNotification;
@@ -194,7 +212,9 @@ SCS_EXTERN NSString * const SCSNotificationPayloadKeyCaseId;
 SCS_EXTERN NSString * const SCServiceCloudLoggingErrorDomain;
 
 // Deprecated mappings
-#define SCS_API_DEPRECATED_WITH_REPLACEMENT(__name) __API_DEPRECATED_WITH_REPLACEMENT(__name, ios(1.0,1.0))
+#ifndef SCS_API_DEPRECATED_WITH_REPLACEMENT
+#define SCS_API_DEPRECATED_WITH_REPLACEMENT(__name) __API_DEPRECATED_WITH_REPLACEMENT(__name, ios(1.0,100.0))
+#endif
 
 SCS_API_DEPRECATED_WITH_REPLACEMENT("SCSAppearanceColorTokenBrandPrimary")
 SCS_EXTERN NSString * const SCSAppearancePrimaryBrandColor;
@@ -314,3 +334,4 @@ SCS_API_DEPRECATED_WITH_REPLACEMENT("SCSAppearanceLabelTokenCaseFeedTitle")
 SCS_EXTERN NSString * const SCAppearanceLabelCaseFeedTitle;
 
 #endif
+

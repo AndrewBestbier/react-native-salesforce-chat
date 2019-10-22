@@ -69,6 +69,11 @@
  */
 @property (nonatomic) UITextAutocorrectionType autocorrectionType;
 
+/**
+ The inital value for the field.
+ */
+@property (nonatomic, copy) NSString *initialValue;
+
 ///---------------------------------
 /// @name Initialization
 ///---------------------------------
@@ -82,6 +87,7 @@
  */
 - (instancetype)initWithLabel:(NSString *)label NS_DESIGNATED_INITIALIZER;
 
+/// :nodoc:
 - (instancetype)initWithLabel:(NSString *)label value:(NSString *)value UNAVAILABLE_ATTRIBUTE;
 
 @end

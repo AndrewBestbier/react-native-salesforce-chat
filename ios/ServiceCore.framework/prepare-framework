@@ -33,7 +33,7 @@ foreach my $framework (bsd_glob("$opt_p/*.framework")) {
                 and warn join(":", __FILE__, __LINE__, " warning") . ": Couldn't trim architectures from $path: $!\n";
         }
 
-        if (-x "$framework/$script_name") {
+        if (-e "$framework/$script_name") {
             unlink("$framework/$script_name");
         }
 

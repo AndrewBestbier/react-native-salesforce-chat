@@ -25,28 +25,33 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  Reasons why a Live Agent Session may have ended.
+ *  Reasons why a chat session may have ended.
  *
- *  @see `-[SCSChatDelegate chat:didEndWithReason:error:]`
+ *  @see `SCSChatSessionEndEvent`
  */
 typedef NS_ENUM(NSInteger, SCSChatEndReason) {
     /**
-     *  User disconnected the session.
+     *  Session was ended due to user interaction.
      */
     SCSChatEndReasonUser = 1,
 
     /**
-     *  Agent disconnected the session.
+     * Session was ended remotely by the agent.
      */
-    SCSChatEndReasonAgent = 2,
+    SCSChatEndReasonAgent,
 
     /**
-     *  Session ended due to timeout
+     * Session was ended as a result of no agents being available.
      */
-    SCSChatEndReasonTimeout = 3,
+    SCSChatEndReasonNoAgentsAvailable,
 
     /**
-     *  Session ended due to an error
+     * Session was ended due to a network disruption resulting in a timeout.
      */
-    SCSChatEndReasonSessionError = 4,
+    SCSChatEndReasonTimeout,
+
+    /**
+     * Session was ended as the result of a fatal error.
+     */
+    SCSChatEndReasonSessionError,
 };

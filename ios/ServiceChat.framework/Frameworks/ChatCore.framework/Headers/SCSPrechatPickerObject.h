@@ -69,6 +69,7 @@
  */
 - (instancetype)initWithLabel:(NSString *)label options:(NSArray<SCSPrechatPickerOption*>*)options NS_DESIGNATED_INITIALIZER;
 
+/// :nodoc:
 - (instancetype)initWithLabel:(NSString *)label value:(NSString *)value UNAVAILABLE_ATTRIBUTE;
 
 @end

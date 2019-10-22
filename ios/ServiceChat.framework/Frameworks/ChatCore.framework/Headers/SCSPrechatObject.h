@@ -47,12 +47,12 @@ extern NSString * const kPrechatVisitorNameLabel;
 /**
  Name of pre-chat detail shown to agent.
  */
-@property (nonatomic, strong, readonly) NSString *label;
+@property (nonatomic, strong, readwrite) NSString *label;
 
 /**
  Value of the pre-chat detail.
  */
-@property (nonatomic, strong, readonly) NSString *value;
+@property (nonatomic, strong, readwrite) NSString *value;
 
 /**
  Display name of the pre-chat detail shown on the mobile device to the end user.

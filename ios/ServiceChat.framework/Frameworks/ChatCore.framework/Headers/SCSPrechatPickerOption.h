@@ -31,7 +31,7 @@
  * This object must be added to the options array on an `SCSPrechatPickerObject`.
  */
 
-@interface SCSPrechatPickerOption : NSObject
+@interface SCSPrechatPickerOption : NSObject <NSCopying>
 
 ///---------------------------------
 /// @name Properties
@@ -62,6 +62,7 @@
  */
 - (instancetype)initWithLabel:(NSString *)pickerLabel value:(NSString *)value NS_DESIGNATED_INITIALIZER;
 
+/// :nodoc:
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
 @end
