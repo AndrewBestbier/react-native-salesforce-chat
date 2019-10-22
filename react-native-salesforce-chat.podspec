@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/CocoaPods/Specs.git" }
   s.source       = { :git => "https://github.com/goinstant/pods-specs-public" }
   s.source_files  = "ios/**/*.{h,m}"
+
   s.dependency 'React'
-  s.dependency 'ServiceSDK', '222.0.2'
+  s.ios.vendored_frameworks = 'ios/ServiceChat.framework', 'ios/ServiceCore.framework'
 end
