@@ -1,6 +1,0 @@
-framework module SalesforceAnalytics {
-  umbrella header "SalesforceAnalytics.h"
-
-  export *
-  module * { export * }
-}
