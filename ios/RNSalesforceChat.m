@@ -4,15 +4,11 @@
 @implementation RNSalesforceChat
 
 NSArray *prechatFields;
-NSMutableArray *prechatEntities;
-SCSChatConfiguration *chatConfiguration;
-
-RCT_EXPORT_MODULE();
-
-NSArray *prechatFields;
 NSArray *prechatEntities;
 SCSChatConfiguration *chatConfiguration;
 SCServiceCloud * cloud;
+
+RCT_EXPORT_MODULE();
 
 -(NSArray *)preChatObjects:(NSDictionary *) chatSettings userSettings: (NSDictionary *)userSettings {
     
@@ -150,6 +146,12 @@ RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
     }
     
     NSArray *events = [NSArray arrayWithObject:[NSNumber numberWithLong:[endEvent reason]]];
+    self.callback(@[[NSNull null], events]);
+}
+
+- (void)session:(id<SCSChatSession>)session didError:(NSError *)error fatal:(BOOL)fatal
+{
+    NSArray *events = [NSArray arrayWithObject:error];
     self.callback(@[[NSNull null], events]);
 }
 
