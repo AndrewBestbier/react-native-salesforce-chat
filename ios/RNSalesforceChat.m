@@ -1,5 +1,5 @@
 #import "RNSalesforceChat.h"
-#import "AppDelegate.h"
+//#import "AppDelegate.h"
 
 @implementation RNSalesforceChat
 
@@ -154,8 +154,8 @@ RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
         UIAlertAction * ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
         [alert addAction:ok];
                 
-        AppDelegate * delegate = (AppDelegate*)(UIApplication.sharedApplication.delegate);
-        [[[delegate window] rootViewController] presentViewController:alert animated:YES completion:nil];
+//        AppDelegate * delegate = (AppDelegate*)(UIApplication.sharedApplication.delegate);
+//        [[[delegate window] rootViewController] presentViewController:alert animated:YES completion:nil];
     }
 }
 
