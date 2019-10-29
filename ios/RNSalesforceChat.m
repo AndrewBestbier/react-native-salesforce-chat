@@ -129,6 +129,7 @@ RCT_EXPORT_METHOD(configChat:(NSString *)orgId
 
 RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
 {
+    self.callback = callback;
     [[SCServiceCloud sharedInstance].chatUI showChatWithConfiguration:chatConfiguration showPrechat:TRUE];
 }
 
@@ -148,15 +149,8 @@ RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
             break;
     }
     
-    if (![description isEqualToString:@""]) {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Chat Session Ended" message:description preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alert addAction:ok];
-                
-//        AppDelegate * delegate = (AppDelegate*)(UIApplication.sharedApplication.delegate);
-//        [[[delegate window] rootViewController] presentViewController:alert animated:YES completion:nil];
-    }
+    NSArray *events = [NSArray arrayWithObject:[NSNumber numberWithLong:[endEvent reason]]];
+    self.callback(@[[NSNull null], events]);
 }
 
 @end
