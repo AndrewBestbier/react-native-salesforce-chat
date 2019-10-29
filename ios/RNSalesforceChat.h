@@ -5,7 +5,9 @@
 #import <React/RCTBridgeModule.h>
 #endif
 
-@interface RNSalesforceChat : NSObject <RCTBridgeModule>
+@import ServiceCore;
+@import ServiceChat;
 
+@interface RNSalesforceChat : NSObject <SCSChatSessionDelegate, RCTBridgeModule>
 @end
 

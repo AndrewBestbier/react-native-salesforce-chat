@@ -1,7 +1,5 @@
 #import "RNSalesforceChat.h"
-
-@import ServiceCore;
-@import ServiceChat;
+#import "AppDelegate.h"
 
 @implementation RNSalesforceChat
 
@@ -11,12 +9,15 @@ SCSChatConfiguration *chatConfiguration;
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings: (NSDictionary *)userSettings)
-{
-    prechatEntities = [NSMutableArray array];
+NSArray *prechatFields;
+NSArray *prechatEntities;
+SCSChatConfiguration *chatConfiguration;
+SCServiceCloud * cloud;
 
-    // Prechat fields
-    prechatFields = @[
+-(NSArray *)preChatObjects:(NSDictionary *) chatSettings userSettings: (NSDictionary *)userSettings {
+    
+    // Prechat objects
+    NSArray * prechatObjects = @[
       [[SCSPrechatObject alloc] initWithLabel:@"Origin" value: chatSettings[@"origin"]],
       [[SCSPrechatObject alloc] initWithLabel:@"CurrencyISOCode" value: chatSettings[@"currencyISOCode"]],
       [[SCSPrechatObject alloc] initWithLabel:@"Status" value: chatSettings[@"status"]],
@@ -32,9 +33,14 @@ RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings: (NSDic
       [[SCSPrechatObject alloc] initWithLabel:@"SuppliedEmail" value: userSettings[@"email"]],
       [[SCSPrechatObject alloc] initWithLabel:@"Email" value: userSettings[@"email"]],
     ];
+    
+    return prechatObjects;
+}
 
++(NSArray *)preChatEntityFields {
+    
     // Prechat entities
-    NSArray *caseEntityFields = @[
+    NSArray *entityFields = @[
          [[SCSPrechatEntityField alloc] initWithFieldName:@"Subject" label:@"Subject"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"Origin" label:@"Origin"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"CurrencyISOCode" label:@"CurrencyIsoCode"],
@@ -51,61 +57,106 @@ RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings: (NSDic
          [[SCSPrechatEntityField alloc] initWithFieldName:@"PointOfCustomerJourney__c" label:@"PointOfCustomerJourney__c"]
     ];
 
-    for (SCSPrechatEntityField* entityField in caseEntityFields) {
+    for (SCSPrechatEntityField* entityField in entityFields) {
         entityField.doCreate = YES;
     }
+    
+    return entityFields;
+}
 
-    SCSPrechatEntity* caseEntity = [[SCSPrechatEntity alloc] initWithEntityName:@"Case"];
-    caseEntity.saveToTranscript = @"Case";
-    caseEntity.showOnCreate = YES;
-    [caseEntity.entityFieldsMaps addObjectsFromArray: caseEntityFields];
-    [prechatEntities addObject:caseEntity];
-
+-(SCSPrechatEntity *) contactEntity {
+    
     SCSPrechatEntityField* emailEntityField = [[SCSPrechatEntityField alloc] initWithFieldName:@"Email" label:@"Email"];
     emailEntityField.doCreate = NO;
     emailEntityField.doFind = YES;
     emailEntityField.isExactMatch = YES;
-
+    
+    
+    // Create an entity mapping for a Contact record type
+    // (All this entity stuff is only required if you
+    // want to map transcript fields to other Salesforce records.)
     SCSPrechatEntity* contactEntity = [[SCSPrechatEntity alloc] initWithEntityName:@"Contact"];
     contactEntity.saveToTranscript = @"Contact";
     contactEntity.showOnCreate = YES;
     contactEntity.linkToEntityName = @"Case";
     contactEntity.linkToEntityField = @"ContactId";
     [contactEntity.entityFieldsMaps addObject:emailEntityField];
-    [prechatEntities addObject:contactEntity];
+    
+    return contactEntity;
 }
 
-RCT_EXPORT_METHOD(configChat:(NSString *)orgId deploymentId:(NSString *)deploymentId buttonId:(NSString *)buttonId liveAgentPod:(NSString *)liveAgentPod suppliedName:(NSString *)suppliedName)
+-(SCSPrechatEntity *) caseEntity {
+    
+    // Create an entity mapping for a Case record type
+    SCSPrechatEntity* caseEntity = [[SCSPrechatEntity alloc] initWithEntityName:@"Case"];
+    caseEntity.saveToTranscript = @"Case";
+    caseEntity.showOnCreate = YES;
+    [caseEntity.entityFieldsMaps addObjectsFromArray:[RNSalesforceChat preChatEntityFields]];
+    
+    return caseEntity;
+}
+
+RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings:(NSDictionary *)userSettings)
+{
+   cloud = [SCServiceCloud sharedInstance];
+   [cloud.chatCore addDelegate:self];
+   
+   prechatFields = [self preChatObjects:chatSettings userSettings:userSettings];
+   prechatEntities = [[NSArray new] arrayByAddingObjectsFromArray:@[[self caseEntity], [self contactEntity]]];
+}
+
+RCT_EXPORT_METHOD(configChat:(NSString *)orgId 
+                  deploymentId:(NSString *)deploymentId 
+                  buttonId:(NSString *)buttonId 
+                  liveAgentPod:(NSString *)liveAgentPod 
+                  suppliedName:(NSString *)suppliedName)
 {
     chatConfiguration =
-    [[SCSChatConfiguration alloc] initWithLiveAgentPod: liveAgentPod
-                                                 orgId: orgId
-                                          deploymentId: deploymentId
-                                              buttonId: buttonId];
+    [[SCSChatConfiguration alloc] initWithLiveAgentPod:liveAgentPod
+                                                 orgId:orgId
+                                          deploymentId:deploymentId
+                                              buttonId:buttonId];
 
     chatConfiguration.visitorName = suppliedName;
-    [chatConfiguration.prechatFields addObjectsFromArray:prechatFields];
-    [chatConfiguration.prechatEntities addObjectsFromArray:prechatEntities];
+    
+    // Update config object with the pre-chat fields
+    chatConfiguration.prechatFields = [[NSArray new] arrayByAddingObjectsFromArray:prechatFields];
+    
+    // Update config object with the entity mappings
+    chatConfiguration.prechatEntities = [[NSArray new] arrayByAddingObjectsFromArray:prechatEntities];
 
 }
 
 RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
 {
-    [[SCServiceCloud sharedInstance].chat
-     determineAvailabilityWithConfiguration:chatConfiguration
-     completion:^(NSError *error, BOOL available) {
+    [[SCServiceCloud sharedInstance].chatUI showChatWithConfiguration:chatConfiguration showPrechat:TRUE];
+}
 
-         if (error != nil) {
-             // Handle error
-         }
-         else if (available) {
-             [[SCServiceCloud sharedInstance].chat startSessionWithConfiguration:chatConfiguration];
-         }
-         else {
-             // Disable button or warn user that no agents are available
-             callback(@[[NSNull null]]);
-         }
-     }];
+// SCSChatSessionDelegate
+-(void)session:(id<SCSChatSession>)session didEnd:(SCSChatSessionEndEvent *)endEvent {
+    
+    NSString * description = @"";
+    
+    switch ([endEvent reason]) {
+        case SCSChatEndReasonAgent:
+            description = @"The agent ended the session.";
+            break;
+        case SCSChatEndReasonNoAgentsAvailable:
+            description = @"No agent available.";
+            break;
+        default:
+            break;
+    }
+    
+    if (![description isEqualToString:@""]) {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Chat Session Ended" message:description preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:ok];
+                
+        AppDelegate * delegate = (AppDelegate*)(UIApplication.sharedApplication.delegate);
+        [[[delegate window] rootViewController] presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 @end
