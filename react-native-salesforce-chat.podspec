@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/**/*.{h,m}"
 
   s.dependency 'React'
-  s.ios.vendored_frameworks = 'ios/Frameworks/ServiceChat.framework', 'ios/Frameworks/ServiceCore.framework' 
+  s.ios.vendored_frameworks = 'ios/Frameworks/ServiceChat.framework', 'ios/Frameworks/ServiceCore.framework','ios/Frameworks/ServiceCases.framework'  
 end
