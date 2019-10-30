@@ -94,14 +94,7 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings:(NSDictionary *)userSettings)
 {
-    cloud = [SCServiceCloud sharedInstance];
-
-    if ([[cloud chatCore] configuration] != nil) {
-        [cloud.chatCore removeDelegate:self];
-    }
-    
-    [cloud.chatCore addDelegate:self];
-    
+    cloud = [SCServiceCloud sharedInstance];    
     prechatFields = [self preChatObjects:chatSettings userSettings:userSettings];
     prechatEntities = [[NSArray new] arrayByAddingObjectsFromArray:@[[self caseEntity], [self contactEntity]]];
 }
