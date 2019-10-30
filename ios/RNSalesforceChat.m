@@ -94,7 +94,11 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings:(NSDictionary *)userSettings)
 {
-    cloud = [SCServiceCloud sharedInstance];    
+    cloud = [SCServiceCloud sharedInstance];
+    
+    [[cloud chatCore] removeDelegate:self];
+    [[cloud chatCore] addDelegate:self];
+    
     prechatFields = [self preChatObjects:chatSettings userSettings:userSettings];
     prechatEntities = [[NSArray new] arrayByAddingObjectsFromArray:@[[self caseEntity], [self contactEntity]]];
 }
@@ -137,6 +141,10 @@ RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
         
         callback(@[[NSNull null]]);
     }];
+}
+
+// SCSChatSessionDelegate
+- (void)session:(id<SCSChatSession>)session didError:(NSError *)error fatal:(BOOL)fatal {
 }
 
 @end
