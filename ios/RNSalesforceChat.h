@@ -8,7 +8,6 @@
 @import ServiceCore;
 @import ServiceChat;
 
-@interface RNSalesforceChat : NSObject <SCSChatSessionDelegate, RCTBridgeModule>
-@property (nonatomic, strong) RCTResponseSenderBlock callback;
+@interface RNSalesforceChat : NSObject <RCTBridgeModule>
 @end
 

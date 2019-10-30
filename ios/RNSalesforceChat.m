@@ -130,34 +130,20 @@ RCT_EXPORT_METHOD(configChat:(NSString *)orgId
 
 RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
 {
-    self.callback = callback;
-    [[SCServiceCloud sharedInstance].chatUI showChatWithConfiguration:chatConfiguration showPrechat:TRUE];
-}
-
-// SCSChatSessionDelegate
--(void)session:(id<SCSChatSession>)session didEnd:(SCSChatSessionEndEvent *)endEvent {
-    
-    NSString * description = @"";
-    
-    switch ([endEvent reason]) {
-        case SCSChatEndReasonAgent:
-            description = @"The agent ended the session.";
-            break;
-        case SCSChatEndReasonNoAgentsAvailable:
-            description = @"No agent available.";
-            break;
-        default:
-            break;
-    }
-    
-    NSArray *events = [NSArray arrayWithObject:[NSNumber numberWithLong:[endEvent reason]]];
-    self.callback(@[[NSNull null], events]);
-}
-
-- (void)session:(id<SCSChatSession>)session didError:(NSError *)error fatal:(BOOL)fatal
-{
-    NSArray *events = [NSArray arrayWithObject:error];
-    self.callback(@[[NSNull null], events]);
+    [[SCServiceCloud sharedInstance].chatCore determineAvailabilityWithConfiguration:chatConfiguration completion:^(NSError *error, BOOL available, NSTimeInterval estimatedWaitTime) {
+        
+         if (error != nil) {
+            // Handle it.
+            return;
+         }
+        
+        if(available) {
+            [[SCServiceCloud sharedInstance].chatUI showChatWithConfiguration:chatConfiguration showPrechat:TRUE];
+            return;
+        }
+        
+        callback(@[[NSNull null]]);
+    }];
 }
 
 @end
