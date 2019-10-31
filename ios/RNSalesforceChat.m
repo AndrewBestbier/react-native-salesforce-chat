@@ -25,6 +25,8 @@ RCT_EXPORT_MODULE();
       [[SCSPrechatObject alloc] initWithLabel:@"EquipmentV2__c" value: chatSettings[@"equipment"]],
       [[SCSPrechatObject alloc] initWithLabel:@"Version__c" value: chatSettings[@"version"]],
       [[SCSPrechatObject alloc] initWithLabel:@"PointOfCustomerJourney__c" value: chatSettings[@"pointOfUserJourney"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"AdditionalInformation__c" value: userSettings[@"additionalInformation"]],
+      [[SCSPrechatObject alloc] initWithLabel:@"GenericBotMessage__c" value: userSettings[@"botMessage"]],
       [[SCSPrechatObject alloc] initWithLabel:@"SuppliedName" value: userSettings[@"name"]],
       [[SCSPrechatObject alloc] initWithLabel:@"SuppliedEmail" value: userSettings[@"email"]],
       [[SCSPrechatObject alloc] initWithLabel:@"Email" value: userSettings[@"email"]],
@@ -49,6 +51,8 @@ RCT_EXPORT_MODULE();
          [[SCSPrechatEntityField alloc] initWithFieldName:@"CanTroubleshootingbedone__c" label:@"CanTroubleshootingbedone__c"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"ProductV2__c" label:@"ProductV2__c"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"EquipmentV2__c" label:@"EquipmentV2__c"],
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"AdditionalInformation__c" label:@"AdditionalInformation__c"],
+         [[SCSPrechatEntityField alloc] initWithFieldName:@"GenericBotMessage__c" label:@"GenericBotMessage__c"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"Version__c" label:@"Version__c"],
          [[SCSPrechatEntityField alloc] initWithFieldName:@"PointOfCustomerJourney__c" label:@"PointOfCustomerJourney__c"]
     ];
