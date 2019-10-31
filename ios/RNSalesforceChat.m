@@ -6,10 +6,10 @@
 NSArray *prechatFields;
 NSArray *prechatEntities;
 SCSChatConfiguration *chatConfiguration;
-SCServiceCloud * cloud;
 
 RCT_EXPORT_MODULE();
 
+//MARK: Private Methods
 -(NSArray *)preChatObjects:(NSDictionary *) chatSettings userSettings: (NSDictionary *)userSettings {
     
     // Prechat objects
@@ -92,13 +92,9 @@ RCT_EXPORT_MODULE();
     return caseEntity;
 }
 
+//MARK: Public Methods
 RCT_EXPORT_METHOD(configLaunch:(NSDictionary *)chatSettings userSettings:(NSDictionary *)userSettings)
 {
-    cloud = [SCServiceCloud sharedInstance];
-    
-    [[cloud chatCore] removeDelegate:self];
-    [[cloud chatCore] addDelegate:self];
-    
     prechatFields = [self preChatObjects:chatSettings userSettings:userSettings];
     prechatEntities = [[NSArray new] arrayByAddingObjectsFromArray:@[[self caseEntity], [self contactEntity]]];
 }
@@ -127,24 +123,25 @@ RCT_EXPORT_METHOD(configChat:(NSString *)orgId
 
 RCT_EXPORT_METHOD(launch:(RCTResponseSenderBlock)callback)
 {
-    [[SCServiceCloud sharedInstance].chatCore determineAvailabilityWithConfiguration:chatConfiguration completion:^(NSError *error, BOOL available, NSTimeInterval estimatedWaitTime) {
+        [[SCServiceCloud sharedInstance].chatCore determineAvailabilityWithConfiguration:chatConfiguration completion:^(NSError *error, BOOL available, NSTimeInterval estimatedWaitTime) {
         
-         if (error != nil) {
-            // Handle it.
-            return;
-         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error != nil) {
+                // Handle it.
+                return;
+            }
+            
+            // Uncomment `available` if you wish to see Chat bubble.
+            if (available) {
+                [[SCServiceCloud sharedInstance].chatUI showChatWithConfiguration:chatConfiguration showPrechat:TRUE];
+                return;
+            }
+            
+            callback(@[[NSNull null]]);
+            
+        });
         
-        if(available) {
-            [[SCServiceCloud sharedInstance].chatUI showChatWithConfiguration:chatConfiguration showPrechat:TRUE];
-            return;
-        }
-        
-        callback(@[[NSNull null]]);
     }];
-}
-
-// SCSChatSessionDelegate
-- (void)session:(id<SCSChatSession>)session didError:(NSError *)error fatal:(BOOL)fatal {
 }
 
 @end

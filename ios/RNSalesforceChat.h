@@ -8,6 +8,6 @@
 @import ServiceCore;
 @import ServiceChat;
 
-@interface RNSalesforceChat : NSObject <SCSChatSessionDelegate, RCTBridgeModule>
+@interface RNSalesforceChat : NSObject <RCTBridgeModule>
 @end
 
