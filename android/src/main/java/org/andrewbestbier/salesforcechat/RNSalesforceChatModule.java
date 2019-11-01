@@ -78,6 +78,10 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
                 .value(chatSettings.getString("version")).build("Version__c", "Version__c", PreChatField.STRING);
         PreChatField pointOfUserJourney = new PreChatField.Builder().hidden(true)
                 .value(chatSettings.getString("pointOfUserJourney")).build("PointOfCustomerJourney__c", "PointOfCustomerJourney__c", PreChatField.STRING);
+        PreChatField additionalInformation = new PreChatField.Builder().hidden(true)
+                .value(chatSettings.getString("additionalInformation")).build("AdditionalInformation__c", "AdditionalInformation__c", PreChatField.STRING);
+        PreChatField botMessage = new PreChatField.Builder().hidden(true)
+                 .value(chatSettings.getString("botMessage")).build("GenericBotMessage__c", "GenericBotMessage__c", PreChatField.STRING);
         PreChatField suppliedEmail = new PreChatField.Builder().hidden(true)
                 .value(userSettings.getString("email")).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
         PreChatField suppliedName = new PreChatField.Builder().hidden(true)
@@ -104,6 +108,8 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
         preChatFields.add(equipment);
         preChatFields.add(version);
         preChatFields.add(pointOfUserJourney);
+        preChatFields.add(additionalInformation);
+        preChatFields.add(botMessage);
 
 
         // Create an entity field builder for Case fields
@@ -127,6 +133,8 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
                 .addPreChatEntityField(caseEntityBuilder.build("EquipmentV2__c", "EquipmentV2__c"))
                 .addPreChatEntityField(caseEntityBuilder.build("Version__c", "Version__c"))
                 .addPreChatEntityField(caseEntityBuilder.build("PointOfCustomerJourney__c", "PointOfCustomerJourney__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("AdditionalInformation__c", "AdditionalInformation__c"))
+                .addPreChatEntityField(caseEntityBuilder.build("GenericBotMessage__c", "GenericBotMessage__c"))
                 .build("Case");
         // Add the entities to the list
         preChatEntities.add(caseEntity);
