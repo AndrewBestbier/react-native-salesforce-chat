@@ -25,14 +25,18 @@ RCT_EXPORT_MODULE();
       [[SCSPrechatObject alloc] initWithLabel:@"EquipmentV2__c" value: chatSettings[@"equipment"]],
       [[SCSPrechatObject alloc] initWithLabel:@"Version__c" value: chatSettings[@"version"]],
       [[SCSPrechatObject alloc] initWithLabel:@"PointOfCustomerJourney__c" value: chatSettings[@"pointOfUserJourney"]],
-      [[SCSPrechatObject alloc] initWithLabel:@"AdditionalInformation__c" value: chatSettings[@"additionalInformation"]],
-      [[SCSPrechatObject alloc] initWithLabel:@"GenericBotMessage__c" value: chatSettings[@"botMessage"]],
       [[SCSPrechatObject alloc] initWithLabel:@"SuppliedName" value: userSettings[@"name"]],
       [[SCSPrechatObject alloc] initWithLabel:@"SuppliedEmail" value: userSettings[@"email"]],
       [[SCSPrechatObject alloc] initWithLabel:@"Email" value: userSettings[@"email"]],
     ];
     
-    return prechatObjects;
+    SCSPrechatObject * aic = [[SCSPrechatObject alloc] initWithLabel:@"AdditionalInformation__c" value: chatSettings[@"additionalInformation"]];
+    SCSPrechatObject* gbc = [[SCSPrechatObject alloc] initWithLabel:@"GenericBotMessage__c" value: chatSettings[@"botMessage"]];
+    
+    aic.transcriptFields = [NSMutableArray arrayWithObject:@"AdditionalInformation__c"];
+    gbc.transcriptFields = [NSMutableArray arrayWithObject:@"GenericBotMessage__c"];
+        
+    return [prechatObjects arrayByAddingObjectsFromArray:@[aic,gbc]];
 }
 
 +(NSArray *)preChatEntityFields {

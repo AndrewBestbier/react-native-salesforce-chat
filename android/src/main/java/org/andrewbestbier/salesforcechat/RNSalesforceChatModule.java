@@ -79,9 +79,9 @@ public class RNSalesforceChatModule extends ReactContextBaseJavaModule {
         PreChatField pointOfUserJourney = new PreChatField.Builder().hidden(true)
                 .value(chatSettings.getString("pointOfUserJourney")).build("PointOfCustomerJourney__c", "PointOfCustomerJourney__c", PreChatField.STRING);
         PreChatField additionalInformation = new PreChatField.Builder().hidden(true)
-                .value(chatSettings.getString("additionalInformation")).build("AdditionalInformation__c", "AdditionalInformation__c", PreChatField.STRING);
+                .value(chatSettings.getString("additionalInformation")).mapToChatTranscriptField("AdditionalInformation__c").build("AdditionalInformation__c", "AdditionalInformation__c", PreChatField.STRING);
         PreChatField botMessage = new PreChatField.Builder().hidden(true)
-                 .value(chatSettings.getString("botMessage")).build("GenericBotMessage__c", "GenericBotMessage__c", PreChatField.STRING);
+                 .value(chatSettings.getString("botMessage")).mapToChatTranscriptField("GenericBotMessage__c").build("GenericBotMessage__c", "GenericBotMessage__c", PreChatField.STRING);
         PreChatField suppliedEmail = new PreChatField.Builder().hidden(true)
                 .value(userSettings.getString("email")).build("SuppliedEmail", "SuppliedEmail", PreChatField.EMAIL);
         PreChatField suppliedName = new PreChatField.Builder().hidden(true)
