@@ -1,23 +1,24 @@
 buildscript {
     repositories {
-        jcenter()
+	google()
+	mavenCentral()
     }
 
     dependencies {
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:4.2.1'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 30
     buildToolsVersion "23.0.1"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -42,13 +43,13 @@ repositories {
 dependencies {
     implementation 'com.salesforce.service:chat-ui:3.1.0'
     implementation 'com.facebook.react:react-native:+'
-    implementation "com.android.support:appcompat-v7:26.1.0"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.annotation:annotation:1.0.2'
 }
 
 allprojects {
   repositories {
     google()
-    jcenter()
     maven {
       url 'https://s3.amazonaws.com/salesforcesos.com/android/maven/release'
     }
