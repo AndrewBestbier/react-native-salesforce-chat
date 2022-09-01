@@ -1,7 +1,10 @@
 {
   "name": "react-native-salesforce-chat",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "description": "React native support for Salesforce live chat",
+  "scripts": {
+    "postinstall" : "npx jetify"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndrewBestbier/react-native-salesforce-chat"
@@ -14,10 +17,13 @@
     "chat"
   ],
   "peerDependencies": {
-    "react-native": "^0.41.2"
+    "react-native": "^0.67.4"
   },
   "author": "Andrew Bestbier <andrew.bestbier@gmail.com>",
   "license": "MIT",
   "nativePackage": true,
-  "homepage": "https://github.com/AndrewBestbier/react-native-salesforce-chat#readme"
+  "homepage": "https://github.com/AndrewBestbier/react-native-salesforce-chat#readme",
+  "devDependencies": {
+    "jetifier": "^2.0.0"
+  }
 }
