@@ -1,23 +1,27 @@
 buildscript {
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
     }
 
     dependencies {
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:4.2.2'
     }
 }
 
 apply plugin: 'com.android.library'
 
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 31
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
@@ -29,6 +33,7 @@ android {
 }
 
 repositories {
+    google()
     mavenCentral()
     maven {
         // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
@@ -41,17 +46,16 @@ repositories {
 
 dependencies {
     implementation 'com.salesforce.service:chat-ui:3.1.0'
-    implementation 'com.facebook.react:react-native:+'
+    implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
     implementation "com.android.support:appcompat-v7:26.1.0"
 }
 
 allprojects {
-  repositories {
-    google()
-    jcenter()
-    maven {
-      url 'https://s3.amazonaws.com/salesforcesos.com/android/maven/release'
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://s3.amazonaws.com/salesforcesos.com/android/maven/release'
+        }
     }
-    mavenCentral()
-  }
 }
