@@ -3,8 +3,8 @@ package org.andrewbestbier.salesforcechat;
 
 import java.util.LinkedList;
 
-import android.support.annotation.NonNull;
-import androidx.core.app.FragmentActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
